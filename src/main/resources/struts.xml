@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+    <package name="default" namespace="/" extends="struts-default">
+   		 <!--显示首页  -->
+        <action name="index" class="myCommunity.web.action.ForumAction" method="index">
+        		<result name="index">/WEB-INF/jsp/index.jsp</result>       
+        </action>
+        
+        <!--显示登录  -->
+     	<action name="login">
+        		 <result>/WEB-INF/jsp/login.jsp</result>   
+        </action>
+        <action name="reginster">
+        		 <result>/WEB-INF/jsp/reginster.jsp</result>   
+        </action>
+        
+        <!--判断登录是否成功，成功就跳转到首页  -->
+		 <action name="checkLogin" class="myCommunity.web.action.UserAction"  method="checkLogin">
+		 		<result name="success" type="redirect">index</result>  
+		 		<result name="input">login</result>         		
+		 </action>
+		 
+		 <!--登录成功后可以注销  -->
+		  <action name="loginOut" class="myCommunity.web.action.UserAction"  method="loginOut">
+		 		<result name="success" type="redirect">index</result>   		       		
+		 </action>
+		 
+		 <!-- 注册页面 -->
+		 <action name="add-user" class="myCommunity.web.action.UserAction" method="reginster">
+		 		<result name="success" type="redirect">login</result>  
+		 		<result name="input">/WEB-INF/jsp/reginster.jsp</result>  
+		 </action>
+		 
+    </package>
+</struts>
